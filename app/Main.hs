@@ -7,11 +7,19 @@ import Lib
 
 type BoardIndex = Int
 data Piece = Maru | Batsu | None
-type Board = [(Int, Piece)]
+type Board = [(BoardIndex, Piece)]
 
 main :: IO ()
-main = someFunc
+main = someFunc     
 
 initBoard :: BoardIndex -> Board
 initBoard 0 = [(0, None)]
 initBoard index = [(index, None)] ++ initBoard (index - 1)
+
+markBoard :: Board -> BoardIndex -> Piece -> Board 
+markBoard board index piece = map (markBoardUnit index piece) board
+
+markBoardUnit :: BoardIndex -> Piece -> (BoardIndex, Piece) ->  (BoardIndex, Piece)
+markBoardUnit index piece unit
+    | index == fst unit = (index, piece)
+    | otherwise = unit
