@@ -1,6 +1,7 @@
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DataKinds #-}
+
 module Main where
 
 import Lib
@@ -26,3 +27,6 @@ markBoardUnit index piece unit
 
 isFinished :: Board -> Bool
 isFinished board = not $ any ((==None).snd) board
+
+extractIndexList :: Board -> Piece -> [BoardIndex]
+extractIndexList board piece = map fst $ filter ((==piece).snd) board
